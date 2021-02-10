@@ -2019,31 +2019,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["titulos", "itens", "criar", "detalhe", "editar", "deletar", "token"],
+  props: ["titulos", "itens", "ordem", "ordemcol", "criar", "detalhe", "editar", "deletar", "token"],
   data: function data() {
     return {
-      buscar: ''
+      buscar: '',
+      ordemAux: this.ordem || 'asc',
+      ordemAuxCol: this.ordem || 0
     };
   },
   methods: {
     executaForm: function executaForm(index) {
       document.getElementById(index).submit();
+    },
+    ordenaColuna: function ordenaColuna(coluna) {
+      this.ordemAuxCol = coluna;
+
+      if (this.ordemAux.toLowerCase() == 'asc') {
+        this.ordemAux = 'desc';
+      } else {
+        this.ordemAux = 'asc';
+      }
     }
   },
   computed: {
     lista: function lista() {
       var _this = this;
 
+      var ordem = this.ordemAux || 'asc';
+      var ordemCol = this.ordemAuxCol || 0;
+      ordem = ordem.toLowerCase();
+      ordemCol = parseInt(ordemCol);
+
+      if (ordem == 'asc') {
+        this.itens.sort(function (a, b) {
+          if (a[ordemCol] > b[ordemCol]) {
+            return 1;
+          }
+
+          if (a[ordemCol] < b[ordemCol]) {
+            return -1;
+          }
+
+          return 0;
+        });
+      } else {
+        this.itens.sort(function (a, b) {
+          if (a[ordemCol] < b[ordemCol]) {
+            return 1;
+          }
+
+          if (a[ordemCol] > b[ordemCol]) {
+            return -1;
+          }
+
+          return 0;
+        });
+      }
+
       return this.itens.filter(function (res) {
-        for (var k = 0; k < res.legth; k++) {
+        for (var k = 0; k < res.length; k++) {
           if ((res[k] + "").toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
             return true;
           }
         }
 
-        return false;
+        return _this.itens;
       });
-      return this.itens;
     }
   }
 });
@@ -38447,8 +38488,20 @@ var render = function() {
         _c(
           "tr",
           [
-            _vm._l(_vm.titulos, function(titulo) {
-              return _c("th", { key: titulo }, [_vm._v(_vm._s(titulo))])
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  key: titulo,
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ordenaColuna(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
             }),
             _vm._v(" "),
             _c("th", [_vm._v("#Ação")])
