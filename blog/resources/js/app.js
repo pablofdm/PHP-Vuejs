@@ -26,7 +26,8 @@ Vue.component('pagina', require('./components/Pagina.vue').default);
 Vue.component('tabela-lista', require('./components/TabelaLista.vue').default);
 Vue.component('migalhas', require('./components/Migalhas.vue').default);
 Vue.component('modal', require('./components/Modal/Modal.vue').default);
-Vue.component('modal-link', require('./components/Modal/ModalLink.vue').default);
+Vue.component('modal-link', require('./components/modal/ModalLink.vue').default);
+Vue.component('formulario', require('./components/modal/Formulario.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
