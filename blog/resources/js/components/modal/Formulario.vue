@@ -1,12 +1,11 @@
 <template>
-    <form v-bind:action="css" v-bind:classi="css" id="post" method="defineMethod" v-bind:enctype="enctype">
+    <form v-bind:action="css" v-bind:classi="css" vbind:id="nome" method="defineMethod" v-bind:enctype="enctype">
         <input v-if="alterMethod" type="hidden" name="_Method" v-bind:value="alterMethod">
         <input v-if="token" type="hidden" name="_token" v-bind:value="token">
         <slot>
 
         </slot>
-    </form>
-        
+    </form>      
 </template>
 
 <script>

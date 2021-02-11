@@ -3197,8 +3197,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['nome']
+  props: ['nome', 'titulo']
 });
 
 /***/ }),
@@ -3507,6 +3515,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.buscar) {
         return this.itens.filter(function (res) {
+          res = Object.values(res);
+
           for (var k = 0; k < res.length; k++) {
             if ((res[k] + "").toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
               return true;
@@ -3583,7 +3593,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -40266,17 +40275,37 @@ var render = function() {
     "div",
     {
       staticClass: "modal fade",
-      attrs: {
-        id: _vm.nome,
-        tabindex: "-1",
-        role: "dialog",
-        "aria-labelledby": _vm.nome,
-        "aria-hidden": "true"
-      }
+      attrs: { id: _vm.nome, tabindex: "-1", role: "dialog" }
     },
     [
-      _c("div", { staticClass: "modal-dialog modal-lg" }, [
-        _c("div", { staticClass: "modal-content" }, [_vm._t("default")], 2)
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _c("h5", { staticClass: "modal-title" }, [
+              _vm._v(_vm._s(_vm.titulo))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [_vm._t("default")], 2),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "modal-footer" },
+            [
+              _vm._t("botoes"),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              )
+            ],
+            2
+          )
+        ])
       ])
     ]
   )
@@ -40775,7 +40804,7 @@ var render = function() {
       attrs: {
         action: _vm.css,
         classi: _vm.css,
-        id: "post",
+        "vbind:id": "nome",
         method: "defineMethod",
         enctype: _vm.enctype
       }
