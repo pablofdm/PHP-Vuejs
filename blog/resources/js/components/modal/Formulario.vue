@@ -1,6 +1,6 @@
 <template>
-    <form v-bind:action="action" v-bind:class="css" id="post" method="defineMethod" v-bind:enctype="enctype">
-        <input v-if="alterMethod" type="hidden" name="_Method" value="alterMethod">
+    <form v-bind:action="css" v-bind:classi="css" id="post" method="defineMethod" v-bind:enctype="enctype">
+        <input v-if="alterMethod" type="hidden" name="_Method" v-bind:value="alterMethod">
         <input v-if="token" type="hidden" name="_token" v-bind:value="token">
         <slot>
 
@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        props: ['css', 'action', 'method', 'class', 'enctype', 'token'],
+        props: ['css', 'action', 'method', 'classi', 'enctype', 'token'],
         data: function(){
             return {
                 alterMethod:""

@@ -5,39 +5,50 @@
     <painel titulo="Lista de Artigos">
         <div></div>
         <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
-        <!-- <button type="button" class="btn btn-primary" >Large modal</button> -->
-        <modal-link tipo="button" nome="#meuModalTeste" data-toggle="modal" data-target="#meuModalTeste" titulo="Criar" css=""></modal-link>
+        
         <tabela-lista 
             v-bind:titulos="['#','Titulo', 'Descrição']" 
-            v-bind:itens="[['1','PHP OO', 'Curso de PHP 00'],['2','Vue js','Curso de Vue.js']]" 
-            criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="753395423" ordem="desc" ordemcol="1"
+            v-bind:itens="{{$listaArtigos}}" 
+            criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="753395423" ordem="desc" ordemcol="1" modal="sim"
             >
         </tabela-lista>
     </painel>
 </pagina>
-<modal nome="meuModalTeste">
-<painel titulo="Adicionar">
-    <form>
+
+<modal nome="adicionar">
+    <painel titulo="Adicionar">
+        <formulario css=""action="#" method="post" enctype="multipart/form-data" token="12345">
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Título" aria-describedby="passwordHelpInline">
+            </div>
+            <div class="form-group">
+                <label for="titulo">Descrição</label>
+                <input type="text" id="descricao" class="form-control" name="titulo" placeholder="Título" aria-describedby="passwordHelpInline">
+            </div>
+                <button class="btn btn-info">Adicionar</button>
+        </formulario>
+    </painel>
+</modal>
+
+<modal nome="editar">
+    <painel titulo="Editar">
+      <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345">
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="titulo">Título</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="descricao">Descrição</label>
+          <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label> 
-        </div>
-    </form>
-    <form>
-        <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+        <button class="btn btn-info">Atualizar</button>
+      </formulario>
+    </painel>
+  </modal>
+<modal nome="detalhe">
+    <painel v-bind:titulo="$store.state.item.titulo">
+        <p>@{{$store.state.item.descricao}}</p>
+    </painel>
 </modal>
 @endsection
