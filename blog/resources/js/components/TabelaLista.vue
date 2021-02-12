@@ -69,6 +69,7 @@
                 <modal-link
                 v-if="detalhe && modal"
                 v-bind:item="item"
+                v-bind:url="detalhe"
                 tipo="button"
                 nome="detalhe"
                 data-toggle="modal"
@@ -97,6 +98,7 @@
                 <modal-link
                 v-if="detalhe && modal"
                 v-bind:item="item"
+                v-bind:url="detalhe"
                 tipo="button"
                 nome="detalhe"
                 data-toggle="modal"
@@ -120,6 +122,7 @@
                 <modal-link
                 v-if="detalhe && modal"
                 v-bind:item="item"
+                v-bind:url="detalhe"
                 tipo="button"
                 nome="detalhe"
                 data-toggle="modal"

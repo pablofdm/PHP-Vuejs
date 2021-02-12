@@ -3604,7 +3604,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['css', 'action', 'method', 'classi', 'enctype', 'token'],
+  props: ['css', 'action', 'method', 'classi', 'enctype', 'token', 'nome'],
   data: function data() {
     return {
       alterMethod: ""
@@ -3729,7 +3729,11 @@ Vue.component('formulario', __webpack_require__(/*! ./components/modal/Formulari
 
 var app = new Vue({
   el: '#app',
-  store: store
+  store: store,
+  mounted: function mounted() {
+    console.log('ok');
+    document.getElementById('app').style.display = 'block';
+  }
 });
 
 /***/ }),
@@ -40802,10 +40806,10 @@ var render = function() {
     "form",
     {
       attrs: {
-        action: _vm.css,
+        action: _vm.action,
         classi: _vm.css,
-        "vbind:id": "nome",
-        method: "defineMethod",
+        id: _vm.nome,
+        method: _vm.defineMethod,
         enctype: _vm.enctype
       }
     },

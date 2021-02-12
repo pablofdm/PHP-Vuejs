@@ -25,12 +25,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes();
 
-Route::middleware(['auth'])->prefix('admin')->namespace('Admin')->group(function(){
+Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('/artigos', [App\Http\Controllers\Admin\ArtigosController::class, 'index'])->name('articlesHome');
+    Route::resources(['/artigos' => App\Http\Controllers\Admin\ArtigosController::class]);
+    //Route::post('/artigos/registro', [App\Http\Controllers\Admin\ArtigosController::class, 'store'])->name("articlesStore");
 });
+
 /*
 Route::middleware(['auth'])->prefix('admin')->namespace('Admin')->group(function(){
-    Route::resource('/artigos', 'ArtigosController@index');
-
+    Route::resource('/artigos',App\Http\Controllers\Admin\ArtigosController::class)->name("artigos.store");
 });
 */

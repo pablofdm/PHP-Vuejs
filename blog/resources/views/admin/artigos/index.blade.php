@@ -2,30 +2,48 @@
 
 @section('content')
 <pagina tamanho="12">
+
+    @if($errors->all())
+        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+            @foreach($errors->all() as $key => $value)
+            <li><strong>{{$value}}</strong> </li>
+            @endforeach
+        </div>
+    @endif
+
     <painel titulo="Lista de Artigos">
         <div></div>
         <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
         
         <tabela-lista 
-            v-bind:titulos="['#','Titulo', 'Descrição']" 
+            v-bind:titulos="['#','Titulo', 'Descrição', 'Data']" 
             v-bind:itens="{{$listaArtigos}}" 
-            criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="753395423" ordem="desc" ordemcol="1" modal="sim"
+            criar="#criar" detalhe="/admin/artigos/" editar="#editar" deletar="#deletar" token="753395423" ordem="desc" ordemcol="1" modal="sim"
             >
         </tabela-lista>
     </painel>
 </pagina>
 
 <modal nome="adicionar" titulo="Adicionar">
-    <formulario id="formAdicionar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+    <formulario id="formAdicionar" css="" action="{{route('artigos.store')}}" method="post" enctype="" token="{{ csrf_token() }}">
     <div class="form-group">
         <label for="titulo">Título</label>
-        <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Título" aria-describedby="passwordHelpInline">
+        <input type="text" id="titulo" class="form-control" name="titulo" placeholder="Título" aria-describedby="passwordHelpInline" value="{{old('titulo')}}">
     </div>
     <div class="form-group">
-        <label for="titulo">Descrição</label>
-        <input type="text" id="descricao" class="form-control" name="descricao" placeholder="descricao" aria-describedby="passwordHelpInline">
+        <label for="descricao">Descrição</label>
+        <input type="text" id="descricao" class="form-control" name="descricao" placeholder="descricao" aria-describedby="passwordHelpInline" value="{{old('descricao')}}">
     </div>
-                    
+    <div class="form-group">
+        <label for="conteudo">Conteudo</label>
+        <textarea name="conteudo" class="form-control">{{old('conteudo')}}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input type="datetime-local" id="data" class="form-control" name="data" aria-describedby="passwordHelpInline" value="{{old('data')}}">
+    </div>
+    
     </formulario>
         <button form="formAdicionar" class="btn btn-info">Adicionar</button>
         <span slot="botoes"></span>
