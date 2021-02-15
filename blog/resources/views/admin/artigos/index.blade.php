@@ -22,7 +22,7 @@
             criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{ csrf_token() }}" ordem="desc" ordemcol="1" modal="sim"
             >
         </tabela-lista>
-        <div align="center">
+        <div class="d-flex row justify-content-center">
             {{$listaArtigos->links()}}
         </div>
     </painel>
