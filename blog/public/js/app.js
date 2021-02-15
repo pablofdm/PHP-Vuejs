@@ -3455,6 +3455,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["titulos", "itens", "ordem", "ordemcol", "criar", "detalhe", "editar", "deletar", "token", "modal"],
   data: function data() {
@@ -3482,13 +3487,14 @@ __webpack_require__.r(__webpack_exports__);
     lista: function lista() {
       var _this = this;
 
+      var lista = this.itens.data;
       var ordem = this.ordemAux;
       var ordemCol = this.ordemAuxCol;
       ordem = ordem.toLowerCase();
       ordemCol = parseInt(ordemCol);
 
       if (ordem == "asc") {
-        this.itens.sort(function (a, b) {
+        lista.sort(function (a, b) {
           if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
             return 1;
           }
@@ -3500,7 +3506,7 @@ __webpack_require__.r(__webpack_exports__);
           return 0;
         });
       } else {
-        this.itens.sort(function (a, b) {
+        lista.sort(function (a, b) {
           if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
             return 1;
           }
@@ -3514,7 +3520,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.buscar) {
-        return this.itens.filter(function (res) {
+        return lista.filter(function (res) {
           res = Object.values(res);
 
           for (var k = 0; k < res.length; k++) {
@@ -3527,7 +3533,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
 
-      return this.itens;
+      return lista;
     }
   }
 });
@@ -3661,10 +3667,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+  props: ['tipo', 'nome', 'titulo', 'css', 'item', 'url'],
   methods: {
     preencheFormulario: function preencheFormulario() {
-      this.$store.commit('setItem', this.item);
+      var _this = this;
+
+      axios.get(this.url + this.item.id).then(function (res) {
+        _this.$store.commit('setItem', res.data);
+      });
     }
   }
 });
@@ -40485,7 +40495,7 @@ var render = function() {
               )
             }),
             _vm._v(" "),
-            _c("th", [_vm._v("#Ação")])
+            _c("th", [_vm._v("Ação")])
           ],
           2
         )
@@ -40510,7 +40520,7 @@ var render = function() {
                           {
                             attrs: {
                               id: index,
-                              action: _vm.deletar,
+                              action: _vm.deletar + item.id,
                               method: "post"
                             }
                           },
@@ -40538,6 +40548,7 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "button",
                                     nome: "detalhe",
                                     "data-toggle": "modal",
@@ -40599,6 +40610,7 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "button",
                                     nome: "detalhe",
                                     "data-toggle": "modal",
@@ -40638,6 +40650,7 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "button",
                                     nome: "detalhe",
                                     "data-toggle": "modal",
@@ -40672,6 +40685,8 @@ var render = function() {
                               ? _c("modal-link", {
                                   attrs: {
                                     tipo: "button",
+                                    url: _vm.editar,
+                                    item: item,
                                     nome: "editar",
                                     "data-toggle": "modal",
                                     "data-target": "#meuModalTeste",

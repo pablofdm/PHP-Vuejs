@@ -19,17 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-Auth::routes();
-
 Route::middleware(['auth'])->prefix('admin')->group(function(){
-    Route::get('/artigos', [App\Http\Controllers\Admin\ArtigosController::class, 'index'])->name('articlesHome');
+    //Route::get('/artigos', [App\Http\Controllers\Admin\ArtigosController::class, 'index'])->name('articlesIndex');
     Route::resources(['/artigos' => App\Http\Controllers\Admin\ArtigosController::class]);
+    Route::resources(['/usuarios' => App\Http\Controllers\Admin\UsuariosController::class]);
     //Route::post('/artigos/registro', [App\Http\Controllers\Admin\ArtigosController::class, 'store'])->name("articlesStore");
 });
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*
 Route::middleware(['auth'])->prefix('admin')->namespace('Admin')->group(function(){

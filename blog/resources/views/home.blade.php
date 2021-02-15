@@ -9,10 +9,10 @@
                     <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas> 
                         <div class="row">
                             <div class="col-md-4">
-                                <caixa qtd="80" titulo="Artigos" url="{{route('articlesHome')}}" cor="orange" icone="ion ion-pie-graph"></caixa>
+                                <caixa qtd="80" titulo="Artigos" url="{{ route('artigos.index') }}" cor="orange" icone="ion ion-pie-graph"></caixa>
                             </div>
                             <div class="col-md-4">
-                                <caixa qtd="1500" titulo="Usuários" cor="navyblue" icone="ion-person-stalker"></caixa>
+                                <caixa qtd="1500" titulo="Usuários" url="{{ route('usuarios.index') }}" cor="navyblue" icone="ion-person-stalker"></caixa>
                             </div>
                             <div class="col-md-4">
                                 <caixa qtd="3" titulo="Autores" cor="green" icone="ion-android-person"></caixa>

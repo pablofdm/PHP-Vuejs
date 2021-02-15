@@ -47,7 +47,7 @@
           >
             {{ titulo }}
           </th>
-          <th>#Ação</th>
+          <th>Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -59,7 +59,7 @@
             <form
               v-bind:id="index"
               v-if="deletar && token"
-              v-bind:action="deletar"
+              v-bind:action="deletar + item.id"
               method="post"
             >
               <input type="hidden" name="_method" value="DELETE" />
@@ -138,6 +138,8 @@
                 <modal-link
                 v-if="editar && modal"
                 tipo="button"
+                v-bind:url="editar"
+                v-bind:item="item"
                 nome="editar"
                 data-toggle="modal"
                 data-target="#meuModalTeste"
@@ -189,14 +191,15 @@ export default {
   computed: {
     lista: function() {
 
+      let lista = this.itens.data;
       let ordem = this.ordemAux;
       let ordemCol = this.ordemAuxCol;
-
+      
       ordem = ordem.toLowerCase();
       ordemCol = parseInt(ordemCol);
 
       if (ordem == "asc") {
-        this.itens.sort((a, b) => {
+        lista.sort((a, b) => {
           if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
             return 1;
           }
@@ -206,7 +209,7 @@ export default {
           return 0;
         });
       } else {
-        this.itens.sort((a, b) => {
+        lista.sort((a, b) => {
           if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
             return 1;
           }
@@ -217,7 +220,7 @@ export default {
         });
       }
       if (this.buscar) {
-        return this.itens.filter((res) => {
+        return lista.filter((res) => {
           res = Object.values(res)
           for (let k = 0; k < res.length; k++) {
             if (
@@ -230,8 +233,9 @@ export default {
           return false;
         });
       }
-      return this.itens;
+      return lista;
     },
   },
+  
 };
 </script>
